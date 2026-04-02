@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+
+  --color-outline: #757777;
+  --color-tertiary-fixed: #faf763;
+  --color-tertiary-fixed-dim: #ebe857;
+  --color-on-surface: #2d2f2f;
+  --color-on-secondary-fixed-variant: #665500;
+  --color-inverse-primary: #fdc003;
+  --color-surface-dim: #d2d5d5;
+  --color-on-background: #2d2f2f;
+  --color-surface-variant: #dbdddd;
+  --color-on-tertiary-fixed-variant: #696800;
+  --color-error: #b02500;
+  --color-error-container: #f95630;
+  --color-secondary-fixed-dim: #edca30;
+  --color-primary-fixed: #fdc003;
+  --color-surface-tint: #755700;
+  --color-on-tertiary: #fcf965;
+  --color-surface-bright: #f6f6f6;
+  --color-primary-fixed-dim: #ecb200;
+  --color-surface-container-highest: #dbdddd;
+  --color-on-surface-variant: #5a5c5c;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-primary-fixed: #3d2b00;
+  --color-tertiary: #605e00;
+  --color-surface-container-high: #e1e3e3;
+  --color-secondary: #6d5a00;
+  --color-secondary-dim: #5f4e00;
+  --color-primary-dim: #664b00;
+  --color-on-secondary-container: #5b4b00;
+  --color-on-secondary: #fff2ce;
+  --color-primary: #755700;
+  --color-tertiary-container: #faf763;
+  --color-tertiary-dim: #535200;
+  --color-inverse-surface: #0c0f0f;
+  --color-on-error: #ffefec;
+  --color-primary-container: #fdc003;
+  --color-on-primary-container: #553e00;
+  --color-on-secondary-fixed: #463900;
+  --color-on-primary-fixed-variant: #604700;
+  --color-on-primary: #fff1db;
+  --color-inverse-on-surface: #9c9d9d;
+  --color-surface: #f6f6f6;
+  --color-secondary-container: #fcd83f;
+  --color-outline-variant: #acadad;
+  --color-surface-container: #e7e8e8;
+  --color-background: #f6f6f6;
+  --color-on-tertiary-fixed: #4b4a00;
+  --color-error-dim: #b92902;
+  --color-on-tertiary-container: #5e5d00;
+  --color-secondary-fixed: #fcd83f;
+  --color-surface-container-low: #f0f1f1;
+  --color-on-error-container: #520c00;
+
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+body {
+  @apply bg-surface font-body text-on-background antialiased overflow-x-hidden;
+}
+
+.hero-glow {
+  background: radial-gradient(circle at top right, #fdc003 0%, #ffffff 70%);
+}
+
+.tonal-shift-bg {
+  background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(246,246,246,0.8) 100%);
+}
