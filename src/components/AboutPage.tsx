@@ -19,7 +19,7 @@ const AboutPage = () => (
             A Sunlit Sanctuary for <span className="text-primary">Every Soul</span>
           </h2>
           <p className="text-xl text-on-surface-variant leading-relaxed">
-            Kittify was born from a simple observation: cats, with their vibrant coats and spirited personalities, deserve a sanctuary that matches their warmth. Our mission is to provide a safe, sun-drenched haven where every rescued ginger kitty can heal, play, and eventually find their forever family.
+            Favored Felines was born from a simple observation: cats, with their vibrant coats and spirited personalities, deserve a sanctuary that matches their warmth. Our mission is to provide a safe, sun-drenched haven where every rescued ginger kitty can heal, play, and eventually find their forever family.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 bg-surface-container-low rounded-2xl space-y-3">

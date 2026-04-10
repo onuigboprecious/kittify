@@ -21,7 +21,7 @@ const AdoptionForm = ({ formRef }: { formRef: React.RefObject<HTMLDivElement | n
 
     formData.append('access_key', accessKey);
     formData.append('subject', 'New Adoption Application');
-    formData.append('from_name', 'Kittify Adoptions');
+    formData.append('from_name', 'Favored Felines Adoptions');
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {

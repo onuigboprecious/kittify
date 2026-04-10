@@ -14,6 +14,9 @@ import AboutPage from "./components/AboutPage";
 import DonatePage from "./components/DonatePage";
 import VolunteerPage from "./components/VolunteerPage";
 import Footer from "./components/Footer";
+import PrivacyPolicyPage from "./components/PrivacyPolicyPage";
+import TermsOfServicePage from "./components/TermsOfServicePage";
+import ContactUsPage from "./components/ContactUsPage";
 
 const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID || "sb";
 
@@ -65,12 +68,18 @@ export default function App() {
           <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, currency: "USD", intent: "capture", components: "buttons" }}>
             <DonatePage key="donate" />
           </PayPalScriptProvider>
+        ) : currentPage === "privacy" ? (
+          <PrivacyPolicyPage key="privacy" />
+        ) : currentPage === "terms" ? (
+          <TermsOfServicePage key="terms" />
+        ) : currentPage === "contact" ? (
+          <ContactUsPage key="contact" />
         ) : (
           <VolunteerPage key="volunteer" />
         )}
       </AnimatePresence>
 
-      <Footer />
+      <Footer onNavigate={navigate} />
     </div>
   );
 }

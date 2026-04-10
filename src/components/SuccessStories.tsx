@@ -28,7 +28,7 @@ const SuccessStories = () => (
           whileHover={{ y: -5 }}
           className="bg-surface-container-lowest p-8 rounded-lg shadow-sm max-w-sm mt-12 transform rotate-2 hover:rotate-0 transition-transform"
         >
-          <p className="text-on-surface italic mb-6">"The Kittify team truly cares. We volunteered for a month and ended up adopting our third cozy kitten!"</p>
+          <p className="text-on-surface italic mb-6">"The Favored Felines team truly cares. We volunteered for a month and ended up adopting our third cozy kitten!"</p>
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center font-bold text-on-secondary-fixed">MB</div>
             <div>

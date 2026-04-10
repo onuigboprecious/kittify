@@ -21,7 +21,7 @@ const VolunteerPage = () => {
 
     formData.append('access_key', accessKey);
     formData.append('subject', 'New Volunteer Application');
-    formData.append('from_name', 'Kittify Volunteers');
+    formData.append('from_name', 'Favored Felines Volunteers');
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
