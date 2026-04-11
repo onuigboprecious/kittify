@@ -163,6 +163,13 @@ export default function HeroDonation() {
                           handlePaymentSuccess(details);
                         }
                       }}
+                      onError={(err) => {
+                        console.error('PayPal Checkout error:', err);
+                        // Optional: You can set a state here to show a friendly error message to the user
+                      }}
+                      onCancel={() => {
+                        console.log('PayPal Checkout cancelled by user');
+                      }}
                     />
                   )}
                 </div>

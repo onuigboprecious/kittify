@@ -23,7 +23,7 @@ const PrivacyPolicyPage = () => (
       </section>
       <section>
         <h2 className="text-2xl font-bold text-zinc-900 mt-8 mb-4">3. Information Sharing</h2>
-        <p>We do not sell your personal information. We may share your information with service providers who assist us in operating our website, processing payments, or coordinating adoptions, subject to strict confidentiality agreements.</p>
+        <p>We do not sell your personal information. We may share your information with service providers who assist us in operating our website or coordinating adoptions, subject to strict confidentiality agreements.</p>
       </section>
     </div>
   </motion.div>

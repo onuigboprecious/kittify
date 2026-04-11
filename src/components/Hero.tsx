@@ -15,7 +15,7 @@ const Hero = ({ onAdoptClick }: { onAdoptClick: () => void }) => (
         >
           <Sparkles className="w-4 h-4 mr-2" /> New Arrivals Ready for Homes
         </motion.div>
-        
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ const Hero = ({ onAdoptClick }: { onAdoptClick: () => void }) => (
         >
           Give a <span className="text-primary"> lovely Kitty </span> a Forever Home
         </motion.h1>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -33,24 +33,24 @@ const Hero = ({ onAdoptClick }: { onAdoptClick: () => void }) => (
         >
           Every cat deserves love – adopt, donate, save lives today. Join our sanctuary in creating sunlit stories for every rescued soul.
         </motion.p>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="flex flex-wrap gap-4 mt-4"
         >
-          <button 
+          <button
             onClick={onAdoptClick}
             className="bg-primary-container hover:bg-primary-fixed-dim text-on-primary-fixed font-headline font-extrabold text-lg px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl shadow-primary/10"
           >
             Adopt Today
           </button>
-          <button className="bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-headline font-extrabold text-lg px-10 py-5 rounded-full transition-all duration-300 border-2 border-primary-container transform hover:scale-105">
+          <a href="/donate" className="bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-headline font-extrabold text-lg px-10 py-5 rounded-full transition-all duration-300 border-2 border-primary-container transform hover:scale-105">
             Donate Now
-          </button>
+          </a>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
