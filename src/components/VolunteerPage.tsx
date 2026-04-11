@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Users, Sparkles, Send } from "lucide-react";
 import React, { useState } from "react";
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const VolunteerPage = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -182,6 +183,9 @@ const VolunteerPage = () => {
                   placeholder="Tell us why you want to volunteer with us"
                   className="w-full bg-surface-container-high border-none rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-primary resize-none"
                 />
+              </div>
+              <div className="flex justify-center my-4">
+                <Turnstile siteKey={(import.meta as any).env.VITE_TURNSTILE_SITE_KEY} />
               </div>
               <button
                 type="submit"

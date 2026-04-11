@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Send, CheckCircle2 } from "lucide-react";
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const ContactUsPage = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -127,6 +128,9 @@ const ContactUsPage = () => {
                   placeholder="How can we help you?"
                   className="w-full px-6 py-4 rounded-2xl bg-surface border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none transition-all"
                 ></textarea>
+              </div>
+              <div className="flex justify-center my-4">
+                <Turnstile siteKey={(import.meta as any).env.VITE_TURNSTILE_SITE_KEY} />
               </div>
               <button 
                 type="submit" 

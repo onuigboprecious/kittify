@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Send } from "lucide-react";
 import React, { useState } from "react";
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const AdoptionForm = ({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }) => {
   const [submitted, setSubmitted] = useState(false);
@@ -140,6 +141,10 @@ const AdoptionForm = ({ formRef }: { formRef: React.RefObject<HTMLDivElement | n
                   placeholder="Tell us about your home and your love for cats..."
                   className="w-full bg-surface-container-high border-none rounded-xl px-6 py-4 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all outline-none resize-none"
                 />
+              </div>
+
+              <div className="flex justify-center my-4">
+                <Turnstile siteKey={(import.meta as any).env.VITE_TURNSTILE_SITE_KEY} />
               </div>
 
               <motion.button
