@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Sparkles } from "lucide-react";
 import React from "react";
 
-const Hero = ({ onAdoptClick }: { onAdoptClick: () => void }) => (
+const Hero = ({ onAdoptClick, onNavigate }: { onAdoptClick: () => void, onNavigate: (page: string) => void }) => (
   <main className="relative pt-24 min-h-screen flex flex-col items-center justify-center overflow-hidden">
     <div className="absolute inset-0 hero-glow -z-10 opacity-40" />
     <div className="max-w-7xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -42,13 +42,13 @@ const Hero = ({ onAdoptClick }: { onAdoptClick: () => void }) => (
         >
           <button
             onClick={onAdoptClick}
-            className="bg-primary-container hover:bg-primary-fixed-dim text-on-primary-fixed font-headline font-extrabold text-lg px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl shadow-primary/10"
+            className="bg-primary-container hover:bg-primary-fixed-dim text-on-primary-fixed font-headline font-extrabold text-lg px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl shadow-primary/10 cursor-pointer"
           >
             Adopt Today
           </button>
-          <a href="/donate" className="bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-headline font-extrabold text-lg px-10 py-5 rounded-full transition-all duration-300 border-2 border-primary-container transform hover:scale-105">
+          <button onClick={() => onNavigate('donate')} className="bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-headline font-extrabold text-lg px-10 py-5 rounded-full transition-all duration-300 border-2 border-primary-container transform hover:scale-105 cursor-pointer">
             Donate Now
-          </a>
+          </button>
         </motion.div>
 
         <motion.div

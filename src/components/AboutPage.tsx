@@ -3,7 +3,7 @@ import { Heart, Users, History, Target, ShieldCheck } from "lucide-react";
 import React from "react";
 
 const AboutPage = () => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     className="pt-24 min-h-screen"
@@ -35,9 +35,9 @@ const AboutPage = () => (
           </div>
         </div>
         <div className="relative">
-          <img 
-            src="https://picsum.photos/seed/cat-sanctuary/1200/800" 
-            alt="The Radiant Feline Sanctuary" 
+          <img
+            src="https://picsum.photos/seed/cat-sanctuary/1200/800"
+            alt="The Radiant Feline Sanctuary"
             className="rounded-3xl shadow-2xl object-cover w-full h-[500px] border-[12px] border-white rotate-2"
             referrerPolicy="no-referrer"
           />
@@ -88,9 +88,9 @@ const AboutPage = () => (
     <section className="py-24 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div className="order-2 lg:order-1 relative">
-          <img 
-            src="https://picsum.photos/seed/cat-history/1200/800" 
-            alt="Sanctuary History" 
+          <img
+            src="https://picsum.photos/seed/cat-history/1200/800"
+            alt="Sanctuary History"
             className="rounded-3xl shadow-2xl object-cover w-full h-[500px] border-[12px] border-white -rotate-2"
             referrerPolicy="no-referrer"
           />
@@ -123,33 +123,33 @@ const AboutPage = () => (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
             {
-              name: "Elena Sunbeam",
+              name: "Ginger McLaughlin",
               role: "Founder & Visionary",
-              bio: "Elena's love for ginger cats started with Marmalade. She oversees the sanctuary's long-term mission and community outreach.",
-              img: "https://picsum.photos/seed/woman-cat/400/400"
+              bio: "Ginger's love for ginger cats started with Marmalade. She oversees the sanctuary's long-term mission and community outreach.",
+              img: "https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-6/633493459_10235856202118648_1060069029248616375_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=102&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeEhzZvSe6BE8gepD98x-bj6VuK2hMVP7P5W4raExU_s_o1dVwTiHNlc4Z_dYfD-KLt8bRhGfwQmvcKo-xQipgzk&_nc_ohc=E76XEBBPPyAQ7kNvwErfYLo&_nc_oc=AdrT3OuPVId-9A3NpWXzwoR2dUXlJs0USTvH16EXG33qVcy27c9GuAXzTFPvWo_DIsk&_nc_zt=23&_nc_ht=scontent-los4-1.xx&_nc_gid=CfLuAClvB8Jf2dBAywg5og&_nc_ss=7a3a8&oh=00_Af2o8Ry9Mqqz25LFpvmhLMI8h3uOfEoa-TZE6-5hYlx04g&oe=69E0532F"
             },
             {
-              name: "Dr. Leo Paws",
-              role: "Head Veterinarian",
-              bio: "With 15 years of feline medicine experience, Leo ensures every kitty is in peak physical health and receives the best care.",
-              img: "https://picsum.photos/seed/vet-cat/400/400"
+              name: "Precious O.",
+              role: "Cat Activist",
+              bio: "With 5 years of feline experience, Precious ensures every kitty is in peak physical health and receives the best care.",
+              img: "https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-6/598484590_10235101317567006_4358755545545753174_n.jpg?stp=c0.169.1536.1536a_cp6_dst-jpg_s206x206_tt6&_nc_cat=109&ccb=1-7&_nc_sid=5df8b4&_nc_eui2=AeFcTpaYoJsuMIJPVosIb3NBm3FX0EtEt-6bcVfQS0S37mzbQvvmRA5RMl7T54g-hLoSX-YEKPTr58tc9AULNUvn&_nc_ohc=aid9-UWwt-oQ7kNvwGk8wAS&_nc_oc=Adqh2DG525F8bKNEBnHIbJWTMVJOvg4TRjNCMfQMjLIMazwlZjgiCgC1bwF_4ybZews&_nc_zt=23&_nc_ht=scontent-los4-1.xx&_nc_gid=1UtZh9KsbKxAv1jCeuPvBA&_nc_ss=7a3a8&oh=00_Af2aHNPt9b9eYNlaMEtdvfBKdcNSQ9MfHZ_wxLWuSb9bZg&oe=69E043E0"
             },
             {
-              name: "Mia Whiskers",
+              name: "Jennifer",
               role: "Adoption Coordinator",
-              bio: "Mia has a sixth sense for matching the right cat with the right family. She's facilitated over 1,000 successful adoptions.",
-              img: "https://picsum.photos/seed/volunteer-cat/400/400"
+              bio: "Jennifer has a sixth sense for matching the right cat with the right family. She's facilitated over 100 successful adoptions.",
+              img: "https://img.freepik.com/free-vector/cute-cat-cartoon-character-with-big-eyes_1340-37228.jpg?semt=ais_hybrid&w=740&q=80"
             }
           ].map((member, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               whileHover={{ y: -10 }}
               className="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm group border border-zinc-100"
             >
               <div className="h-72 overflow-hidden">
-                <img 
-                  src={member.img} 
-                  alt={member.name} 
+                <img
+                  src={member.img}
+                  alt={member.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />

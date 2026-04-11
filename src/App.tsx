@@ -58,7 +58,7 @@ export default function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <Hero onAdoptClick={scrollToForm} />
+            <Hero onAdoptClick={scrollToForm} onNavigate={navigate} />
             <SuccessStories />
             <AdoptionForm formRef={formRef} />
           </motion.div>
