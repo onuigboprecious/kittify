@@ -132,13 +132,13 @@ const AboutPage = () => (
               name: "Precious O.",
               role: "Cat Activist",
               bio: "With 5 years of feline experience, Precious ensures every kitty is in peak physical health and receives the best care.",
-              img: "https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-6/598484590_10235101317567006_4358755545545753174_n.jpg?stp=c0.169.1536.1536a_cp6_dst-jpg_s206x206_tt6&_nc_cat=109&ccb=1-7&_nc_sid=5df8b4&_nc_eui2=AeFcTpaYoJsuMIJPVosIb3NBm3FX0EtEt-6bcVfQS0S37mzbQvvmRA5RMl7T54g-hLoSX-YEKPTr58tc9AULNUvn&_nc_ohc=aid9-UWwt-oQ7kNvwGk8wAS&_nc_oc=Adqh2DG525F8bKNEBnHIbJWTMVJOvg4TRjNCMfQMjLIMazwlZjgiCgC1bwF_4ybZews&_nc_zt=23&_nc_ht=scontent-los4-1.xx&_nc_gid=1UtZh9KsbKxAv1jCeuPvBA&_nc_ss=7a3a8&oh=00_Af2aHNPt9b9eYNlaMEtdvfBKdcNSQ9MfHZ_wxLWuSb9bZg&oe=69E043E0"
+              img: "https://1drv.ms/i/c/682ff269d31480d6/IQRXRX7HzfG9SoXVyAhBlASCAVDgP6l7Jtptk9h_gs7QCDQ"
             },
             {
-              name: "Jennifer",
+              name: "Mia Jennifer",
               role: "Adoption Coordinator",
               bio: "Jennifer has a sixth sense for matching the right cat with the right family. She's facilitated over 100 successful adoptions.",
-              img: "https://img.freepik.com/free-vector/cute-cat-cartoon-character-with-big-eyes_1340-37228.jpg?semt=ais_hybrid&w=740&q=80"
+              img: "https://1drv.ms/i/c/682ff269d31480d6/IQSHnBFYVprSRps-fjfH_wb7Af5ihjnsxak_g3dbaiWnHJ0"
             }
           ].map((member, i) => (
             <motion.div
@@ -150,7 +150,7 @@ const AboutPage = () => (
                 <img
                   src={member.img}
                   alt={member.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
               </div>

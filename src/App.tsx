@@ -42,14 +42,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-surface flex flex-col">
       <Navbar 
         onNavigate={navigate} 
         currentPage={currentPage} 
         onAdoptClick={scrollToForm} 
       />
       
-      <AnimatePresence mode="wait">
+      <main className="flex-1 flex flex-col">
+        <AnimatePresence mode="wait">
         {currentPage === "home" ? (
           <motion.div
             key="home"
@@ -77,7 +78,8 @@ export default function App() {
         ) : (
           <VolunteerPage key="volunteer" />
         )}
-      </AnimatePresence>
+        </AnimatePresence>
+      </main>
 
       <Footer onNavigate={navigate} />
     </div>
