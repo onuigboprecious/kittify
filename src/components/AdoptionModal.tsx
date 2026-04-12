@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { X, Send, CheckCircle2 } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { Turnstile } from '@marsidev/react-turnstile';
+
 
 interface AdoptionModalProps {
   isOpen: boolean;
@@ -182,9 +182,7 @@ export default function AdoptionModal({ isOpen, onClose, catName }: AdoptionModa
                       />
                     </div>
 
-                    <div className="flex justify-center scale-90 py-2">
-                      <Turnstile siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY} />
-                    </div>
+                    <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
                     <button
                       type="submit"
