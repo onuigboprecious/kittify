@@ -17,6 +17,8 @@ import Footer from "./components/Footer";
 import PrivacyPolicyPage from "./components/PrivacyPolicyPage";
 import TermsOfServicePage from "./components/TermsOfServicePage";
 import ContactUsPage from "./components/ContactUsPage";
+import AdoptPage from "./components/Adopt";
+
 
 const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID || "sb";
 
@@ -75,9 +77,12 @@ export default function App() {
           <TermsOfServicePage key="terms" />
         ) : currentPage === "contact" ? (
           <ContactUsPage key="contact" />
+        ) : currentPage === "adopt" ? (
+          <AdoptPage key="adopt" />
         ) : (
           <VolunteerPage key="volunteer" />
         )}
+
         </AnimatePresence>
       </main>
 

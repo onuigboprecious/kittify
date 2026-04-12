@@ -28,17 +28,17 @@ const Navbar = ({ onNavigate, currentPage, onAdoptClick }: { onNavigate: (page: 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
       <div className="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-        <button 
+        <button
           onClick={() => handleNavigate("home")}
           className="text-2xl font-black text-zinc-900 tracking-tight font-headline cursor-pointer"
         >
           Favored Felines
         </button>
-        
+
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <button 
+            <button
               key={link.id}
               onClick={() => handleNavigate(link.id)}
               className={`font-headline font-bold text-base transition-colors duration-200 rounded-lg px-3 py-1 ${currentPage === link.id ? "text-zinc-900 bg-zinc-100" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 cursor-pointer"}`}
@@ -47,20 +47,20 @@ const Navbar = ({ onNavigate, currentPage, onAdoptClick }: { onNavigate: (page: 
             </button>
           ))}
         </div>
-        
+
         <div className="hidden md:block">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => { onAdoptClick(); setIsOpen(false); }}
+            onClick={() => handleNavigate("adopt")}
             className="bg-primary-container text-on-primary-fixed font-headline font-bold px-6 py-2.5 rounded-full shadow-lg shadow-primary/10 cursor-pointer text-zinc-900"
           >
-            Get Involved
+            Adopt a Cat
           </motion.button>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button 
+        <button
           className="md:hidden p-2 text-zinc-900 cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
@@ -80,7 +80,7 @@ const Navbar = ({ onNavigate, currentPage, onAdoptClick }: { onNavigate: (page: 
           >
             <div className="flex flex-col px-6 py-4 gap-4">
               {navLinks.map((link) => (
-                <button 
+                <button
                   key={link.id}
                   onClick={() => handleNavigate(link.id)}
                   className={`text-left font-headline font-bold text-lg px-4 py-3 rounded-xl transition-colors cursor-pointer ${currentPage === link.id ? "bg-zinc-100 text-zinc-900" : "text-zinc-600 active:bg-zinc-50"}`}
@@ -90,10 +90,10 @@ const Navbar = ({ onNavigate, currentPage, onAdoptClick }: { onNavigate: (page: 
               ))}
               <div className="pt-4 mt-2 border-t border-zinc-100 pb-2">
                 <button
-                  onClick={() => { onAdoptClick(); setIsOpen(false); }}
+                  onClick={() => handleNavigate("adopt")}
                   className="w-full bg-primary-container text-on-primary-fixed font-headline font-bold px-6 py-3.5 rounded-xl shadow-md flex justify-center items-center cursor-pointer text-zinc-900"
                 >
-                  Get Involved
+                  Adopt a Cat
                 </button>
               </div>
             </div>
