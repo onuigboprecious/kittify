@@ -9,6 +9,7 @@ const AboutPage = () => (
     className="pt-24 min-h-screen"
   >
     {/* Mission Section */}
+    {/* mission */}
     <section className="py-24 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8">
