@@ -1,13 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Send, CheckCircle2 } from "lucide-react";
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const ContactUsPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<HCaptcha>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,16 +20,9 @@ const ContactUsPage = () => {
       return;
     }
 
-    if (!captchaToken) {
-      alert('Please complete the security check before submitting.');
-      setIsSubmitting(false);
-      return;
-    }
-
     formData.append('access_key', accessKey);
     formData.append('subject', 'New Contact Message');
     formData.append('from_name', 'Favored Felines Contact');
-    formData.append('h-captcha-response', captchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -43,8 +34,6 @@ const ContactUsPage = () => {
 
       if (data.success) {
         setSubmitted(true);
-        setCaptchaToken(null);
-        captchaRef.current?.resetCaptcha();
         (e.target as HTMLFormElement).reset();
         setTimeout(() => setSubmitted(false), 5000);
       } else {
@@ -141,17 +130,11 @@ const ContactUsPage = () => {
                 ></textarea>
               </div>
               <div className="flex justify-center my-4">
-                <HCaptcha
-                  ref={captchaRef}
-                  sitekey={(import.meta as any).env.VITE_HCAPTCHA_SITE_KEY}
-                  onVerify={(token) => setCaptchaToken(token)}
-                  onExpire={() => setCaptchaToken(null)}
-                  onError={() => setCaptchaToken(null)}
-                />
+                <Turnstile siteKey={(import.meta as any).env.VITE_TURNSTILE_SITE_KEY} />
               </div>
               <button
                 type="submit"
-                disabled={isSubmitting || !captchaToken}
+                disabled={isSubmitting}
                 className="w-full bg-primary-container hover:bg-primary-fixed-dim text-on-primary-fixed font-headline font-black text-lg py-4 rounded-full shadow-lg shadow-primary/10 transition-all flex justify-center items-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'} <Send className="w-5 h-5" />

@@ -1,13 +1,11 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Users, Sparkles, Send } from "lucide-react";
-import React, { useState, useRef } from "react";
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import React, { useState } from "react";
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const VolunteerPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<HCaptcha>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,16 +20,9 @@ const VolunteerPage = () => {
       return;
     }
 
-    if (!captchaToken) {
-      alert('Please complete the security check before submitting.');
-      setIsSubmitting(false);
-      return;
-    }
-
     formData.append('access_key', accessKey);
     formData.append('subject', 'New Volunteer Application');
     formData.append('from_name', 'Favored Felines Volunteers');
-    formData.append('h-captcha-response', captchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -43,8 +34,6 @@ const VolunteerPage = () => {
 
       if (data.success) {
         setSubmitted(true);
-        setCaptchaToken(null);
-        captchaRef.current?.resetCaptcha();
         (e.target as HTMLFormElement).reset();
         setTimeout(() => setSubmitted(false), 5000);
       } else {
@@ -196,17 +185,11 @@ const VolunteerPage = () => {
                   />
                 </div>
                 <div className="flex justify-center my-4">
-                  <HCaptcha
-                    ref={captchaRef}
-                    sitekey={(import.meta as any).env.VITE_HCAPTCHA_SITE_KEY}
-                    onVerify={(token) => setCaptchaToken(token)}
-                    onExpire={() => setCaptchaToken(null)}
-                    onError={() => setCaptchaToken(null)}
-                  />
+                  <Turnstile siteKey={(import.meta as any).env.VITE_TURNSTILE_SITE_KEY} />
                 </div>
                 <button
                   type="submit"
-                  disabled={isSubmitting || !captchaToken}
+                  disabled={isSubmitting}
                   className="w-full bg-primary-container text-on-primary-fixed font-headline font-black text-xl py-5 rounded-full shadow-xl shadow-primary/10 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit Volunteer Application'} <Send className="w-5 h-5" />
