@@ -1,8 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { X, Send, CheckCircle2 } from "lucide-react";
-import React, { useState, useEffect, useRef } from "react";
-import HCaptcha from '@hcaptcha/react-hcaptcha';
-
+import React, { useState, useEffect } from "react";
+import { Turnstile } from '@marsidev/react-turnstile';
 
 interface AdoptionModalProps {
   isOpen: boolean;
@@ -13,8 +12,6 @@ interface AdoptionModalProps {
 export default function AdoptionModal({ isOpen, onClose, catName }: AdoptionModalProps) {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<HCaptcha>(null);
 
   // Lock scroll and RESET state when modal opens/changes
   useEffect(() => {
@@ -33,12 +30,6 @@ export default function AdoptionModal({ isOpen, onClose, catName }: AdoptionModa
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!captchaToken) {
-      alert('Please complete the captcha verification.');
-      setIsSubmitting(false);
-      return;
-    }
-
     const formData = new FormData(e.currentTarget);
     const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
@@ -51,7 +42,6 @@ export default function AdoptionModal({ isOpen, onClose, catName }: AdoptionModa
     formData.append('access_key', accessKey);
     formData.append('subject', `Adoption Application for ${catName}`);
     formData.append('cat_interested', catName);
-    formData.append('h-captcha-response', captchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -63,8 +53,6 @@ export default function AdoptionModal({ isOpen, onClose, catName }: AdoptionModa
 
       if (data.success) {
         setSubmitted(true);
-        captchaRef.current?.resetCaptcha();
-        setCaptchaToken(null);
       } else {
         alert(data.message || 'Error submitting application.');
       }
@@ -195,12 +183,7 @@ export default function AdoptionModal({ isOpen, onClose, catName }: AdoptionModa
                     </div>
 
                     <div className="flex justify-center scale-90 py-2">
-                      <HCaptcha
-                        sitekey="50b2fe65-b00b-4ea9-a645-cbad3cc70ab0"
-                        onVerify={(token) => setCaptchaToken(token)}
-                        onExpire={() => setCaptchaToken(null)}
-                        ref={captchaRef}
-                      />
+                      <Turnstile siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY} />
                     </div>
 
                     <button
