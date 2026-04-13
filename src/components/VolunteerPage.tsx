@@ -1,11 +1,13 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Users, Sparkles, Send } from "lucide-react";
-import React, { useState } from "react";
-import { Turnstile } from '@marsidev/react-turnstile';
+import React, { useState, useRef } from "react";
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 const VolunteerPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -13,9 +15,15 @@ const VolunteerPage = () => {
 
     const formData = new FormData(e.currentTarget);
     const accessKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY;
-    
+
     if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
       alert('Web3Forms access key is not configured. Please check your .env file.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!captchaToken) {
+      alert('Please complete the security check before submitting.');
       setIsSubmitting(false);
       return;
     }
@@ -23,6 +31,7 @@ const VolunteerPage = () => {
     formData.append('access_key', accessKey);
     formData.append('subject', 'New Volunteer Application');
     formData.append('from_name', 'Favored Felines Volunteers');
+    formData.append('h-captcha-response', captchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -34,6 +43,8 @@ const VolunteerPage = () => {
 
       if (data.success) {
         setSubmitted(true);
+        setCaptchaToken(null);
+        captchaRef.current?.resetCaptcha();
         (e.target as HTMLFormElement).reset();
         setTimeout(() => setSubmitted(false), 5000);
       } else {
@@ -49,7 +60,7 @@ const VolunteerPage = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="pt-24 min-h-screen"
@@ -83,9 +94,9 @@ const VolunteerPage = () => {
             </div>
           </div>
           <div className="relative">
-            <img 
-              src="https://picsum.photos/seed/rescued-stray-cat/1200/1000" 
-              alt="A rescued stray cat in the sanctuary" 
+            <img
+              src="https://picsum.photos/seed/rescued-stray-cat/1200/1000"
+              alt="A rescued stray cat in the sanctuary"
               className="rounded-3xl shadow-2xl object-cover w-full h-[600px] border-[12px] border-white -rotate-2"
               referrerPolicy="no-referrer"
             />
@@ -113,7 +124,7 @@ const VolunteerPage = () => {
                 <p className="text-on-tertiary-container text-lg leading-relaxed">
                   Thank you for your interest in volunteering. Our team will review your application and get back to you within 48 hours.
                 </p>
-                <button 
+                <button
                   onClick={() => setSubmitted(false)}
                   className="mt-8 text-on-tertiary-container font-bold underline underline-offset-4"
                 >
@@ -129,72 +140,78 @@ const VolunteerPage = () => {
                 onSubmit={handleSubmit}
                 className="space-y-6"
               >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Full Name</label>
+                    <input
+                      required
+                      type="text"
+                      name="name"
+                      placeholder="Enter your full name"
+                      className="w-full bg-surface-container-high border-none rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Email Address</label>
+                    <input
+                      required
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email address"
+                      className="w-full bg-surface-container-high border-none rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Full Name</label>
+                  <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Phone Number</label>
                   <input
                     required
-                    type="text"
-                    name="name"
-                    placeholder="Enter your full name"
+                    type="tel"
+                    name="phone"
+                    placeholder="(555) 000-0000"
                     className="w-full bg-surface-container-high border-none rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Email Address</label>
-                  <input
+                  <label htmlFor="availability" className="text-sm font-headline font-bold text-on-surface-variant ml-4">Availability</label>
+                  <select
+                    id="availability"
+                    name="availability"
+                    className="w-full bg-surface-container-high border-none rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-primary appearance-none"
+                  >
+                    <option value="weekdays-morning">Weekdays (Morning)</option>
+                    <option value="weekdays-afternoon">Weekdays (Afternoon)</option>
+                    <option value="weekends">Weekends</option>
+                    <option value="flexible">Flexible</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Why do you want to volunteer?</label>
+                  <textarea
                     required
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email address"
-                    className="w-full bg-surface-container-high border-none rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-primary"
+                    rows={4}
+                    name="message"
+                    placeholder="Tell us why you want to volunteer with us"
+                    className="w-full bg-surface-container-high border-none rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-primary resize-none"
                   />
                 </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Phone Number</label>
-                <input
-                  required
-                  type="tel"
-                  name="phone"
-                  placeholder="(555) 000-0000"
-                  className="w-full bg-surface-container-high border-none rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-primary"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="availability" className="text-sm font-headline font-bold text-on-surface-variant ml-4">Availability</label>
-                <select
-                  id="availability"
-                  name="availability"
-                  className="w-full bg-surface-container-high border-none rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-primary appearance-none"
+                <div className="flex justify-center my-4">
+                  <HCaptcha
+                    ref={captchaRef}
+                    sitekey={(import.meta as any).env.VITE_HCAPTCHA_SITE_KEY}
+                    onVerify={(token) => setCaptchaToken(token)}
+                    onExpire={() => setCaptchaToken(null)}
+                    onError={() => setCaptchaToken(null)}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting || !captchaToken}
+                  className="w-full bg-primary-container text-on-primary-fixed font-headline font-black text-xl py-5 rounded-full shadow-xl shadow-primary/10 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <option value="weekdays-morning">Weekdays (Morning)</option>
-                  <option value="weekdays-afternoon">Weekdays (Afternoon)</option>
-                  <option value="weekends">Weekends</option>
-                  <option value="flexible">Flexible</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-headline font-bold text-on-surface-variant ml-4">Why do you want to volunteer?</label>
-                <textarea
-                  required
-                  rows={4}
-                  name="message"
-                  placeholder="Tell us why you want to volunteer with us"
-                  className="w-full bg-surface-container-high border-none rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-primary resize-none"
-                />
-              </div>
-              <div className="flex justify-center my-4">
-                <Turnstile siteKey={(import.meta as any).env.VITE_TURNSTILE_SITE_KEY} />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-primary-container text-on-primary-fixed font-headline font-black text-xl py-5 rounded-full shadow-xl shadow-primary/10 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? 'Submitting...' : 'Submit Volunteer Application'} <Send className="w-5 h-5" />
-              </button>
-            </motion.form>
+                  {isSubmitting ? 'Submitting...' : 'Submit Volunteer Application'} <Send className="w-5 h-5" />
+                </button>
+              </motion.form>
             )}
           </AnimatePresence>
         </div>

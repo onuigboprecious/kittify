@@ -13,7 +13,7 @@ const AdoptionForm = ({ formRef }: { formRef: React.RefObject<HTMLDivElement | n
 
     const formData = new FormData(e.currentTarget);
     const accessKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY;
-    
+
     if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
       alert('Web3Forms access key is not configured. Please check your .env file.');
       setIsSubmitting(false);
@@ -70,7 +70,7 @@ const AdoptionForm = ({ formRef }: { formRef: React.RefObject<HTMLDivElement | n
               <p className="text-on-tertiary-container text-lg leading-relaxed">
                 Thank you for your interest in adopting. Our team will review your application and get back to you within 48 hours.
               </p>
-              <button 
+              <button
                 onClick={() => setSubmitted(false)}
                 className="mt-8 text-on-tertiary-container font-bold underline underline-offset-4"
               >
