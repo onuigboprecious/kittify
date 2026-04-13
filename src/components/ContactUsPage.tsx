@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Send, CheckCircle2 } from "lucide-react";
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 
 const ContactUsPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    if (!captchaToken) {
+      alert('Please complete the captcha verification.');
+      setIsSubmitting(false);
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const accessKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY;
@@ -23,6 +32,7 @@ const ContactUsPage = () => {
     formData.append('access_key', accessKey);
     formData.append('subject', 'New Contact Message');
     formData.append('from_name', 'Favored Felines Contact');
+    formData.append('h-captcha-response', captchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -35,6 +45,8 @@ const ContactUsPage = () => {
       if (data.success) {
         setSubmitted(true);
         (e.target as HTMLFormElement).reset();
+        captchaRef.current?.resetCaptcha();
+        setCaptchaToken(null);
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         console.error('Web3Forms error:', data);
@@ -129,7 +141,14 @@ const ContactUsPage = () => {
                   className="w-full px-6 py-4 rounded-2xl bg-surface border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none transition-all"
                 ></textarea>
               </div>
-              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+              <div className="flex justify-center my-4">
+                <HCaptcha
+                  sitekey="50b2fe65-b00b-4ea9-a645-cbad3cc70ab0"
+                  onVerify={(token) => setCaptchaToken(token)}
+                  onExpire={() => setCaptchaToken(null)}
+                  ref={captchaRef}
+                />
+              </div>
               <button 
                 type="submit" 
                 disabled={isSubmitting}
