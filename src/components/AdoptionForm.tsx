@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Send } from "lucide-react";
 import React, { useState } from "react";
-import { Turnstile } from '@marsidev/react-turnstile';
+
 
 const AdoptionForm = ({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }) => {
   const [submitted, setSubmitted] = useState(false);
@@ -143,9 +143,7 @@ const AdoptionForm = ({ formRef }: { formRef: React.RefObject<HTMLDivElement | n
                 />
               </div>
 
-              <div className="flex justify-center my-4">
-                <Turnstile siteKey={(import.meta as any).env.VITE_TURNSTILE_SITE_KEY} />
-              </div>
+
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
